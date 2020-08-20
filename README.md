@@ -21,8 +21,8 @@ ADB でパズドラの画面をスクショし、定石メーカーに反映さ�
 
 ADB：インストール必須  
 MacOS Catelina 10.15.6  
-Win10  
-Python 3.6.4  
+Win10 Home 1909  
+Python 3.6.4, 3.7.4  
 (Win は試してません)  
 
 ## 作者
