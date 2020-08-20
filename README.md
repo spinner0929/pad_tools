@@ -24,3 +24,4 @@ Python 3.6.4
 
 ## 作者
 
+[@nagagutsu_af](https://twitter.com/nagagutsu_af)
