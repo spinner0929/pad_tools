@@ -29,7 +29,7 @@ def color(array):
 def __round(array):
     # 配列の平均値を算出
     return int(round(np.average(array)))
-    
+
 def get_url(strs):
     # 定石メーカーのURLを生成
     url = "http://serizawa.web5.jp/puzzdra_theory_maker/index.html?layout=" + str(strs) + "&route=05,&ctwMode=false"
@@ -39,14 +39,11 @@ if __name__ == "__main__":
     # 盤面のマス目の座標を設定する（始点、幅、終点）
     xa, xs, xb = 27, 170, 197
     ya, ys, yb =  1267, 170, 1437
-    
+
     # 盤面をスクショして認識する
-    a = ("adb", "shell", "screencap", "-p", "/sdcard/screen")
-    b = ("adb", "pull", "/sdcard/screen", "screenshot.png")
-    c = ("adb", "shell", "rm", "/sdcard/screen")
-    subprocess.call(a)
-    subprocess.call(b)
-    subprocess.call(c)
+    subprocess.call(("adb", "shell", "screencap", "-p", "/sdcard/screen"))
+    subprocess.call(("adb", "pull", "/sdcard/screen", "screenshot.png"))
+    subprocess.call(("adb", "shell", "rm", "/sdcard/screen"))
     pic = Image.open("./screenshot.png", 'r')
     color_list = []
 
@@ -56,6 +53,6 @@ if __name__ == "__main__":
             box = (xa + xs*i + 26, ya + ys*j + 26, xb + xs*i - 26, yb + ys*j - 26)
             rgb = get_rgb(pic, box)
             color_list.append(color(rgb))
-    
+
     field = "".join(color_list)
     wb.open(get_url(field))

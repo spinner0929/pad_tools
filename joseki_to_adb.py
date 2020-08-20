@@ -15,17 +15,16 @@ import subprocess
 '''
 
 def hold(point_list):  #  位置情報の軌跡通りに adb でタップ&スワイプ命令する
-    cmd_str = "adb shell sendevent {event} {types} {axes} {value}"
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="57", value="1"), shell=True)
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="48", value="1"), shell=True)
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="1", axes="330", value="1"), shell=True)
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "3", "57", "1"))
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "3", "48", "1"))
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "1", "330", "1"))
     for point in point_list:
-        subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="53", value=str(point[0])), shell=True)
-        subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="54", value=str(point[1])), shell=True)
-        subprocess.call(cmd_str.format(event="/dev/input/event1", types="0", axes="0", value="0"), shell=True)
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="57", value="4294967295"), shell=True)
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="1", axes="330", value="0"), shell=True)
-    subprocess.call(cmd_str.format(event="/dev/input/event1", types="0", axes="0", value="0"), shell=True)
+        subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "3", "53", str(point[0])))
+        subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "3", "54", str(point[1])))
+        subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "0", "0", "0"))
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "3", "57", "4294967295"))
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "1", "330", "0"))
+    subprocess.call(("adb", "shell", "sendevent", "/dev/input/event1", "0", "0", "0"))
 
 
 def exe(strs):  # 定石メーカーのシミュレーション動作を位置情報の軌跡に変換する
@@ -34,8 +33,8 @@ def exe(strs):  # 定石メーカーのシミュレーション動作を位置�
                "06": [110,1530], "16": [280,1530], "26": [450,1530], "36": [620,1530], "46": [790,1530], "56": [960,1530], \
                "07": [110,1695], "17": [280,1695], "27": [450,1695], "37": [620,1695], "47": [790,1695], "57": [960,1695], \
                "08": [110,1860], "18": [280,1860], "28": [450,1860], "38": [620,1860], "48": [790,1860], "58": [960,1860], \
-               "09": [110,2025], "19": [280,2025], "29": [450,2025], "39": [620,2025], "49": [790,2025], "59": [960,2025]} 
-    
+               "09": [110,2025], "19": [280,2025], "29": [450,2025], "39": [620,2025], "49": [790,2025], "59": [960,2025]}
+
     # 定石メーカー上の軌跡と盤面の対応
     move = {"0":-9, "1":1, "2":11, "3":-10, "4":10, "5":-11, "6":-1, "7":9}
     list1 = [default[strs[:2]]]
@@ -44,7 +43,7 @@ def exe(strs):  # 定石メーカーのシミュレーション動作を位置�
     	loc = int(strs[1:2])
     else:
     	loc = int(strs[:2])
-    
+
     # 軌跡を表す数字に応じて現在地を変更する
     for i in strs[3:]:
         if(10 <= loc + move[i]):
@@ -52,7 +51,7 @@ def exe(strs):  # 定石メーカーのシミュレーション動作を位置�
         elif(loc + move[i] < 10):
             list1.append(default["0" + str(loc + move[i])])
         loc = loc + move[i]
-    
+
     return list1
 
 
@@ -69,6 +68,3 @@ if __name__ =='__main__':
                 print("URL が正しくありません！")
         else:  # 定石メーカーのURL 以外もエラー
             print("URL が正しくありません！")
-        
-
-    
