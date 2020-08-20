@@ -14,7 +14,7 @@ import subprocess
 0 0 0 ... 情報送信
 '''
 
-def hold(point_list):
+def hold(point_list):  #  定石メーカーのシミュレーションURLを adb の命令形式に変換する
     cmd_str = "adb shell sendevent {event} {types} {axes} {value}"
     subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="57", value="1"), shell=True)
     subprocess.call(cmd_str.format(event="/dev/input/event1", types="3", axes="48", value="1"), shell=True)
@@ -28,7 +28,7 @@ def hold(point_list):
     subprocess.call(cmd_str.format(event="/dev/input/event1", types="0", axes="0", value="0"), shell=True)
 
 
-def exe(strs):
+def exe(strs):  # 定石メーカーの軌跡通りに実機でパズルさせる
     # 盤面のマス目とスマホの座標の対応を定義しておく
     default = {"05": [110,1365], "15": [280,1365], "25": [450,1365], "35": [620,1365], "45": [790,1365], "55": [960,1365], \
                "06": [110,1530], "16": [280,1530], "26": [450,1530], "36": [620,1530], "46": [790,1530], "56": [960,1530], \
@@ -45,6 +45,7 @@ def exe(strs):
     else:
     	loc = int(strs[:2])
     
+    # 軌跡を表す数字に応じて現在地を変更する
     for i in strs[3:]:
         if(10 <= loc + move[i]):
             list1.append(default[str(loc + move[i])])
