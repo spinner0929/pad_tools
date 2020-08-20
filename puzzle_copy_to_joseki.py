@@ -36,7 +36,7 @@ def get_url(strs):
     return url
 
 if __name__ == "__main__":
-    # 盤面のマス目の座標を設定する
+    # 盤面のマス目の座標を設定する（始点、幅、終点）
     xa, xs, xb = 27, 170, 197
     ya, ys, yb =  1267, 170, 1437
     
