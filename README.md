@@ -3,7 +3,6 @@
 Android SDK ツール内の ADB コマンドで、パズドラのパズル操作を拡張するプログラムです。
 
 ## 概要
-<br>
 ### puzzle_copy_to_joseki.py
 <br>
 ADB でパズドラの画面をスクショし、定石メーカーに反映させます。  
@@ -23,7 +22,7 @@ adb shell input swipe (x1) (y1) (x2) (y2) (半径)
 その代わり、(x1, y1) → (x2, y2) → (x3, y3) のスワイプ操作は以下のコードで可能です。  
 <br>
 ```
-# スワイプ開始
+\# スワイプ開始
 adb shell sendevent /dev/input/event1 3 57 (端末ポート番号)
 adb shell sendevent /dev/input/event1 3 48 (タッチ領域半径)
 adb shell sendevent /dev/input/event1 1 330 1
@@ -40,7 +39,7 @@ adb shell sendevent /dev/input/event1 3 53 (x3)
 adb shell sendevent /dev/input/event1 3 54 (y3)
 adb shell sendevent /dev/input/event1 0 0 0
 
-# スワイプ終了
+\# スワイプ終了
 adb shell sendevent /dev/input/event1 3 57 4294967295
 adb shell sendevent /dev/input/event1 1 330 0
 adb shell sendevent /dev/input/event1 0 0 0
