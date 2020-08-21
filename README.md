@@ -15,13 +15,16 @@ ADB でパズドラの画面をスクショし、定石メーカーに反映さ�
 プログラム実行後、コマンドラインで定石メーカーのパズル共有のURLを入力する仕様です。  
 具体的には、URLのパズル情報を位置情報の羅列（軌跡）に変換し、その軌跡通りにスワイプの命令をします。  
 Android SDK ツールにはスワイプのコマンドが用意されていますが、直線以外のスワイプには対応できません。  
+<br>
 
 ```
 adb shell input swipe (x1) (y1) (x2) (y2) (半径)
 ```
+
 <br>
 その代わり、(x1, y1) → (x2, y2) → (x3, y3) のスワイプ操作は以下のコードで可能です。  
 <br>
+
 ```
 \# スワイプ開始
 adb shell sendevent /dev/input/event1 3 57 (端末ポート番号)
@@ -45,6 +48,7 @@ adb shell sendevent /dev/input/event1 3 57 4294967295
 adb shell sendevent /dev/input/event1 1 330 0
 adb shell sendevent /dev/input/event1 0 0 0
 ```
+
 <br>
 実行の際はパズドラを起動した Android を接続し、パズル操作可能な状態にしてください。  
 
