@@ -32,7 +32,7 @@ adb shell sendevent /dev/input/event5 3 40 47
 adb shell sendevent /dev/input/event5 0 0 5
 
 
-この結果をコピペして実行すれば、Android のデバイス操作を再現できます。
+この結果をコピペして実行すれば、Android のデバイス操作を再現できる。
 '''
 
 with open("./log.txt", 'r') as log:
